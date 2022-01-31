@@ -23,7 +23,7 @@ let cells = [];
                 for (e = 0; e < 3; e++) {
                     let createCellInRows = document.createElement("div");
                     createCellInRows.setAttribute("id", "lin" + i + e);
-                    createCellInRows.setAttribute("style", "width: 50px; height: 50px;background-color: rgb(169, 231, 77); cursor: pointer; margin: 3px;");
+                    createCellInRows.classList = "styleOfCells";
                     createCellsByColumns.appendChild(createCellInRows);
                     createCellInRows.onclick = function () {
                         if (!cells.includes(createCellInRows.id)) {
@@ -74,7 +74,7 @@ let cells = [];
         }
 
         function playerStep(player, playerCombinations) {
-            (player == 1) ? document.getElementById(cellsID).setAttribute("style", "border: 16px solid rgb(120, 0, 0); border-radius: 20px; height:20px; width:20px; box-shadow:2px 2px 4px 0 black;") : document.getElementById(cellsID).setAttribute("style", "border: 16px solid #f00; border-radius: 20px; height:20px; width:20px; box-shadow:2px 2px 4px 0 black");
+            (player == 1) ? document.getElementById(cellsID).classList = "firstPlayer" : document.getElementById(cellsID).classList = "secondPlayer";
             if (playerCombinations.length >= 3) {
                 resultGame(player, playerCombinations);
             }
