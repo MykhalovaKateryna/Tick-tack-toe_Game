@@ -1,0 +1,31 @@
+/* div {
+            width: 50px;
+            height: 50px;
+            background-color: rgb(169, 231, 77);
+            cursor: pointer;
+            margin: 3px;
+        } */
+
+rowClass {
+  width: 50px;
+  height: 50px;
+  background-color: rgb(169, 231, 77);
+  cursor: pointer;
+  margin: 3px;
+}
+
+colClass {
+  width: 50px;
+  height: 50px;
+  background-color: rgb(169, 231, 77);
+  cursor: pointer;
+  margin: 3px;
+}
+
+.player_1 {
+  background-color: rgb(205, 10, 223);
+}
+
+.player_2 {
+  background-color: rgb(16, 160, 78);
+}
