@@ -2,21 +2,15 @@ let cells = [];
 let counter = 1;
 let stepsFirstPlayer = [];
 let stepsSecondPlayer = [];
-let winCombinationsCounter = 0;
-let playerCombinations = [];
-let player;
 let cellsID;
-let createCellInRows;
-let createCellsByColumns;
-let bodyId;
 
 window.onload = function () {
-  playingField();
+  createField();
 };
 
-function playingField() {
+function createField() {
   for (i = 0; i < 3; i++) {
-    createCellsByColumns = document.createElement("div");
+    let createCellsByColumns = document.createElement("div");
     createCellsByColumns.setAttribute("id", "col" + i);
     let bodyId = document.getElementById("main");
     bodyId.appendChild(createCellsByColumns);
@@ -25,18 +19,21 @@ function playingField() {
       createCellInRows.setAttribute("id", "lin" + i + e);
       createCellInRows.classList = "styleOfCells";
       createCellsByColumns.appendChild(createCellInRows);
-      createCellInRows.onclick = xex(createCellInRows.id);
+      createCellInRows.addEventListener("click", (event) =>
+        playerTurn(createCellInRows.id)
+      );
     }
   }
 }
 
-function xex(id) {
-  if (!cells.includes(id)) {
-    cells += id;
-    cellsID = id;
-    counter++;
-    determinePlayer(counter);
+function playerTurn(idSelectedCell) {
+  if (cells.includes(idSelectedCell)) {
+    return;
   }
+  cells.push(idSelectedCell);
+  cellsID = idSelectedCell;
+  counter++;
+  determinePlayer(counter);
 }
 
 function determinePlayer(counter) {
@@ -49,7 +46,20 @@ function determinePlayer(counter) {
   }
 }
 
-function resultGame(player, playerCombinations) {
+function playerStep(player, playerCombinations) {
+  player == 1
+    ? changeCellView(cellsID, "firstPlayer")
+    : changeCellView(cellsID, "secondPlayer");
+  if (playerCombinations.length >= 3) {
+    gameOver(player, playerCombinations);
+  }
+}
+
+function changeCellView(cellsID, className) {
+  document.getElementById(cellsID).classList = className;
+}
+
+function gameOver(player, playerCombinations) {
   let winCombinations = [
     ["lin00", "lin10", "lin20"],
     ["lin01", "lin11", "lin21"],
@@ -76,14 +86,5 @@ function resultGame(player, playerCombinations) {
         break;
       }
     }
-  }
-}
-
-function playerStep(player, playerCombinations) {
-  player == 1
-    ? (document.getElementById(cellsID).classList = "firstPlayer")
-    : (document.getElementById(cellsID).classList = "secondPlayer");
-  if (playerCombinations.length >= 3) {
-    resultGame(player, playerCombinations);
   }
 }
