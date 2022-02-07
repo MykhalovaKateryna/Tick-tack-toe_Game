@@ -2,13 +2,9 @@ let cells = [];
 let counter = 1;
 let stepsFirstPlayer = [];
 let stepsSecondPlayer = [];
-let cellsID;
-
-window.onload = function () {
-  createField();
-};
 
 function createField() {
+  let button = (document.getElementById("button").onclick = "stop");
   for (i = 0; i < 3; i++) {
     let createCellsByColumns = document.createElement("div");
     createCellsByColumns.setAttribute("id", "col" + i);
@@ -31,22 +27,22 @@ function playerTurn(idSelectedCell) {
     return;
   }
   cells.push(idSelectedCell);
-  cellsID = idSelectedCell;
+  let cellsID = idSelectedCell;
   counter++;
-  determinePlayer(counter);
+  determinePlayer(counter, cellsID);
 }
 
-function determinePlayer(counter) {
+function determinePlayer(counter, cellsID) {
   if (counter % 2 == 0) {
     stepsFirstPlayer.push(cellsID);
-    playerStep(1, stepsFirstPlayer);
+    playerStep(1, stepsFirstPlayer, cellsID);
   } else {
     stepsSecondPlayer.push(cellsID);
-    playerStep(2, stepsSecondPlayer);
+    playerStep(2, stepsSecondPlayer, cellsID);
   }
 }
 
-function playerStep(player, playerCombinations) {
+function playerStep(player, playerCombinations, cellsID) {
   player == 1
     ? changeCellView(cellsID, "firstPlayer")
     : changeCellView(cellsID, "secondPlayer");
@@ -75,6 +71,7 @@ function gameOver(player, playerCombinations) {
     for (i = 0; i < playerCombinations.length + 1; i++) {
       if (winCombinationsCounter == 3) {
         alert("player: " + player + " win!");
+        let fin = (document.body.innerHTML = "WINNER player " + player);
       }
       if (winCombinations[e].includes(playerCombinations[i])) {
         winCombinationsCounter++;
